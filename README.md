@@ -22,6 +22,7 @@ Now, why is this interesting? According to the **manifold hypothesis**, "high di
 ### Denoising Autoencoder 
 
 What does our denoising autoencoder (DAE) have to do with all of this? Let us remember how it looks like:
+
 <img align="center" width="500" src="https://github.com/juelha/DenoisingAutoencoder/blob/main/doc/DAE.png" hspace="10">
 
 Our DAE has to learn how to map corrupted inputs $\tilde{x}$ back to the original inputs $x$. For our circle example the red points are the noise.
