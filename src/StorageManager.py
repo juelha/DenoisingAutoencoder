@@ -74,47 +74,24 @@ def load_data(shape_name):
 
 
 def save_model(model, shape_name):
+    """saves state dict of Pytorch torch.nn.Module
+
+    Args:
+        model (torch.nn.Module): trained model
+        shape_name (str): name of shape that model was trained on
+    """
     path = get_path(f'./{shape_name}.pth', relative_path=f'/models/')
     torch.save(model.state_dict(), path)
 
+
 def load_model(shape_name):
+    """Loads a trained model
+
+    Args:
+        shape_name (str): name of shape that model was trained on
+    """
     path = get_path(f'./{shape_name}.pth', relative_path=f'/models/')
     model = Autoencoder()
     model.load_state_dict(torch.load(path, weights_only=True))
-   # net.to(device) # "send to gpu"
     return model
 
-
-
-def save_hps(hps, df_name, trainer_name):
-    """"""
-    file_name = f"hps_{trainer_name}.yml"
-    relative_path = f"/config/{df_name}/"
-    path = get_path(file_name, relative_path)
-
-    with open(path, 'w') as yaml_file:
-        yaml.dump(hps, yaml_file, default_flow_style=False)
-
-def load_hps(df_name, trainer_name):
-    file_name = f"hps_{trainer_name}.yml"
-    relative_path = f"/config/{df_name}/"
-    path = get_path(file_name, relative_path)
-
-    assert os.path.exists(path), f'File {file_name} not found'
-    with open(path, 'r') as config_file:
-    # Converts yaml document to np array object
-        params = yaml.load(config_file, Loader=UnsafeLoader)#get_loader())#UnsafeLoader)
-        return params
-    
-
-# def trainer_constructor(loader: yaml.SafeLoader, node: yaml.nodes.MappingNode) -> Trainer:
-#   """Construct a trainer."""
-#   return Trainer(**loader.construct_mapping(node))
-
-# def get_loader():
-#   """Add constructors to PyYAML loader."""
-#   loader = yaml.SafeLoader
-#   loader.add_constructor("!Trainer", trainer_constructor)
-#   return loader
-
-    

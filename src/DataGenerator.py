@@ -5,6 +5,21 @@ import torch
 This scripts contains functions for generating datasets
 """
 
+def generate(shape_name, n_samples):
+    """Wrapper that calls the corresponding generator func
+
+    Args:
+        shape_name (str): name of shape
+        n_samples (int): number of coordinates to generate
+    """
+    if shape_name=="line":
+        return gen_line(n_samples)
+    if shape_name=="circle":
+        return gen_circle(n_samples)
+    if shape_name=="spiral":
+        return gen_spiral(n_samples)
+    
+
 def gen_spiral(n_samples):
     """Generate (x,y) coordinates in the shape of a spiral
 
@@ -52,19 +67,19 @@ def gen_circle(n_samples):
     return x, y
 
 
-def corruption_process(x, y):
+def corruption_process(x, y, mu=0.0, sigma=0.1):
     """Corrupt the data given as the coordinates (x,y) with gaussian noise
 
     Args:
         x (nd.array): x-coordinates  
         y (nd.array): y-coordinates
+        mu (float): mean ("center") of distribution
+        sigma (float): std deviation ("width") of distribution
 
     Returns:
         (x_corrupted, y_corrupted) (tuple(nd.array,nd.array)): tuple of corrupted x- and y-coordinates
     """
     # gen noise with same size as that of the data
-    mu = 0
-    sigma = 0.1
     noise_x = np.random.normal(mu, sigma, len(x)) 
     noise_y = np.random.normal(mu, sigma, len(y)) 
 
