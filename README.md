@@ -5,7 +5,7 @@
 
 - By the group DataSippers
 
-### Manifold Learning
+### Manifolds
 In this demo, we will see how a denoising autoencoder will learn the vector field for three examples of one-dimensional manifolds: a line, a circle and a spiral.
 
 *But a circle is not one but two-dimensional!* you may correctly say. That is where the concept of **manifolds** comes in. In mathematics, a manifold is a topological space that locally resembles
