@@ -6,15 +6,17 @@ from tqdm import tqdm
 class Trainer():
 
     def __init__(self, model=None, hps=None):
-        """_summary_
+        """Trainer() performs backprop using an optimizer on a model 
 
         Args:
-            n_inputs (_type_): _description_
-            n_outputs (_type_): _description_
-            optimizer_func (_type_, optional): _description_. Defaults to "Adam".
-            learning_rate (_type_, optional): _description_. Defaults to None.
-            n_epochs (_type_, optional): _description_. Defaults to None.
-
+            model (torch.nn.Module): instantiated Pytorch Model
+            hps (dict): dictionary of hyperparameters
+                learning_rate (int): learning rate for the optimizer,
+                n_epochs (int): total number of epochs for training loop (Note: one epoch is one whole pass over training dataset)
+                batch_size (int): size of train batches 
+                criterion (callable) : instantiated torch.nn Loss function
+                optimizer (torch.optim): optimization algorithm from torch.optim
+                
         Attributes:
             test_accuracies (list(float)): keeping track of test accuracies during training
             test_losses (list(float)): keeping track of test losses during training
@@ -24,15 +26,11 @@ class Trainer():
 
         self.model = model
         
-        # # hyperparamers
-        self.n_epochs = 40
-        self.learning_rate =  1
-        self.batch_size = 10
-        self.criterion = None
-
+        # init the hyper parameters
         for param_name in hps.keys():
             setattr(self, param_name, hps[param_name])
 
+        # instantiate optimizer
         self.optimizer = self.optimizer(self.model.parameters(), lr=self.learning_rate)
 
         # to track performance
@@ -75,7 +73,7 @@ class Trainer():
             self.train_accuracies.append(np.mean(self.epoch_acc))
 
         print(f"Epoch {epoch}: Loss={self.test_losses[-1]:.2f}, Accuracy={self.test_accuracies[-1]*100:.1f}%")
-        
+
 
     def train_step(self, x_batch, y_batch ):
         """Performing train step on one batch
