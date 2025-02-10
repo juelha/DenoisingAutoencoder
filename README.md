@@ -41,9 +41,9 @@ That means our DAE not only approximates the function of a circle, but also of t
 
 ### Option 1: [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/juelha/DenoisingAutoencoder/blob/main/demo.ipynb)
 
-### Option 2: Run Locally 
-- install the conda environment with ```conda env create -f env.yml```
+### Option 2: Run Locally
 - Clone the Repository or Download the ZIP File and extract.
+- Install the conda environment with ```conda env create -f env.yml```
 - Open the demo.ipynb by using your preferred code editor or jupyter 
 
 
